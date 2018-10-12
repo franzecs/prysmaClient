@@ -1,0 +1,20 @@
+<div *ngFor="let menu of menus">
+  <div class="dropdown componenteform">
+    <button class="btn btn-info btn-lg btn-block dropdown-toggle fa {{menu.img}} sombra-btn" 
+      type="button"
+      id="optmenu" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false" >
+      {{menu.titulo}}<span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="optmenu">
+      <div *ngFor="let item of menu.itens">
+        <li class="aw-menu__item" style="font-size: 14px">
+          <a [routerLink]="[item.url]" class="item-menu">
+            <i class="fa  {{item.img}}"></i> <span> {{item.titulo}}</span>
+          </a>
+        </li>
+      </div>
+    </ul>
+  </div>
+  <div class="dropdown-divider"></div>
+</div>

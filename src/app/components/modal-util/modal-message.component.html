@@ -1,0 +1,40 @@
+<div *ngIf="MessageIsVisible && type === 'delete'" class="modal fade show" id="myModal" role="dialog" 
+            style="display: block; background:rgba(0,0,0,.4)">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+				<h4 class="modal-title" style="color: red"><span class="fa fa-exclamation-triangle"> Excluir?</span></h4>
+				<button type="button" class="close" data-dismiss="modal"(click)="hideMsg()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>{{Message}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="hideMsg()">Não</button>
+                <button type="button" class="btn btn-primary" (click)="Confirmar()">Sim </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="MessageIsVisible && type === 'sucesso'" class="modal fade show" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body sucesso">
+                <button type="button" class="close" data-dismiss="modal"(click)="hideMsg()">&times;</button>
+                <p>{{Message}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="MessageIsVisible && type === 'error'" class="modal fade show" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body error">
+                <button type="button" class="close" data-dismiss="modal"(click)="hideMsg()">&times;</button>
+                <p><span class="fa fa-exclamation-triangle"></span> {{Message}}</p>
+            </div>
+        </div>
+    </div>
+</div>

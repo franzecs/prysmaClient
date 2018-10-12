@@ -1,0 +1,35 @@
+<nav class="text-center">
+  <ul class="pagination justify-content-center">
+    <li *ngIf="pagina!==1" class="page-item">
+      <a href="#" aria-label="Primeiro"
+      	(click)="paginar(1, $event)" class="page-link">
+        <span aria-hidden="true" class="fa fa-angle-double-left"></span>
+      </a>
+    </li>
+    <li *ngIf="pagina!==1" class="page-item">
+      <a href="#" aria-label="Anterior"
+      	(click)="paginar(pagina-1, $event)" class="page-link">
+        <span aria-hidden="true" class="fa fa-angle-left"></span>
+      </a>
+    </li>
+    <li *ngFor="let i of paginas" 
+    	[ngClass]="{'active': i===pagina}" class="page-item">
+  		<a href="#" (click)="paginar(i, $event)" class="page-link">{{ i }}</a>
+  	</li>
+    <li *ngIf="exibirProximo" class="page-item">
+      <a href="#" aria-label="Próximo"
+      	(click)="paginar(pagina+1, $event)" class="page-link">
+        <span aria-hidden="true" class="fa fa-angle-right"></span>
+      </a>
+    </li>
+    <li *ngIf="exibirProximo" class="page-item">
+      <a href="#" aria-label="Último"
+      	(click)="paginar(qtdPaginas, $event)" class="page-link">
+        <span aria-hidden="true" class="fa fa-angle-double-right"></span>
+      </a>
+    </li>
+  </ul>
+  <p>Total de registros: <strong>{{ totalRegistros }}</strong>, 
+  	 pág. <strong>{{ pagina }}</strong> 
+  	 de <strong>{{ qtdPaginas }}</strong>.</p>
+</nav>

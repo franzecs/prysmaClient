@@ -1,0 +1,18 @@
+<div id="mySidenav" class="sidenav">
+    <ik-menu [menus]="menus"></ik-menu>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+</div>
+
+<div id="main">
+    <div>
+        <app-topo></app-topo>
+    </div>
+
+    <div style="margin: auto">
+        <router-outlet></router-outlet>
+    </div>
+
+    <div>
+        <app-rodape></app-rodape>
+    </div>
+</div>
