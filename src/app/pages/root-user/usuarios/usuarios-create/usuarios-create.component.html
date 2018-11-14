@@ -1,0 +1,108 @@
+<div class="card">
+  <div class="page-top sombra">
+    Cadastro de Usuário
+    <a [routerLink]="['/root/usuarios']">
+      <button class=" btn btn-warning btn-xs fa fa-arrow-circle-left pull-right" style="margin-top:2px;margin-right: 2px; padding: 2px;"></button>
+    </a>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmite()" *ngIf="formulario !== undefined">
+      <div class="col-xl-12 card-flat" >
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 text-center">
+            <div *ngIf="usuario === undefined" class="text-center">
+              <loading-spinner></loading-spinner>
+            </div>
+            <img [src]="usuario.url_perfil" class="img-fluid img-thumbnail" style="width: 200px;" *ngIf="usuario !== undefined" />
+          </div>
+          <div class="col-xs-12 col-md-6">
+
+            <div class="form-group">
+              <label>Nome</label>
+              <input type="text" class="form-control" formControlName="nome" ikUpCase/>
+            </div>
+            <div class="form-group">
+              <label for="roles">Email</label>
+              <input type="email" class="form-control" formControlName="email" ikLoCase/>
+            </div>
+            <div class="form-group">
+              <label for=empresa class="control-label">Empresa</label>
+              <select class="form-control" id="empresa" formControlName="empresa" [compareWith]="testEmpresa">
+                <option *ngFor="let empresa of empresas" [ngValue]="empresa">{{empresa.nome}}</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <div class="form-group">
+              <label for="roles">Perfis</label>
+              <app-checkbox-group [options]="userPerfis" (toggle)="onRolesChange($event)"></app-checkbox-group>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 card-flat">
+        <div formGroupName="endereco">
+          <div class="row">
+            <div class="col-xs-12 col-md-2">
+              <div class="form-group">
+                <label for="cep" class="control-label">CEP</label>
+                <input type="text" class="form-control" id="cep" (blur)="consultaCEP()" formControlName="cep">
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-md-8">
+              <div class="form-group">
+                <label for="rua" class="control-label">Rua</label>
+                <input type="text" class="form-control" id="rua" formControlName="logradouro">
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-md-2">
+              <div class="form-group">
+                <label for="numero" class="control-label">Número</label>
+                <input type="text" class="form-control" id="numero" formControlName="numero">
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-md-3">
+              <div class="form-group">
+                <label for="complemento" class="control-label">Complemento</label>
+                <input type="text" class="form-control" id="complemento" formControlName="complemento">
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-md-5">
+              <div class="form-group">
+                <label for="bairro" class="control-label">Bairro</label>
+                <input type="text" class="form-control" id="bairro" formControlName="bairro">
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-md-2">
+              <div class="form-group">
+                <label for="cidade" class="control-label">Cidade</label>
+                <select class="form-control" id="cidade" formControlName="cidade">
+                  <option *ngFor="let cidade of cidades" [value]="cidade.nome">{{ cidade.nome }}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-md-2">
+              <div class="form-group">
+                <label for="estado" class="control-label">Estado</label>
+                <select class="form-control" id="estado" formControlName="estado">
+                  <option *ngFor="let estado of estados" [value]="estado.sigla">{{ estado.nome }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <button type="submit" class="btn btn-primary sombra-btn" [disabled]="!formulario.valid">salvar</button>
+      <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#ikUpload">Upload foto</button>
+    </form>
+  </div>
+  <modal-message></modal-message>
+</div>

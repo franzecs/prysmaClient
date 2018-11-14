@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../config/auth.service';
-
+import { AuthService } from 'src/app/services';
 
 @Component({
   selector: 'app-topo',
@@ -12,13 +11,15 @@ export class TopoComponent implements OnInit {
 
   showMenu: boolean = false
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    public auth: AuthService
+    ) { }
 
   ngOnInit() {
   }
 
   public sair(){
-    this.authService.signOut()
+    this.auth.logout()
   }
 
   controlNav(){

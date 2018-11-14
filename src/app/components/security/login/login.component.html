@@ -1,0 +1,32 @@
+<div class="container" style="margin: 20%,auto;">
+  <div class="row">
+    <div class="col-sm-12 d-flex justify-content-center">
+
+      <div class="card-transparente" style="width: 20rem; margin-top: 50px;">
+        <div class="card-login" style="color: white; background-color: black">
+          <div class="card-title">
+            <img src="../../../../assets/img/prysma_logo.png" class="img-responsive img-thumbnail bg-transparent" />
+          </div>
+
+          <form [formGroup]="formulario" (ngSubmit)="login()">
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="E-mail" formControlName="email">
+              <small *ngIf="!formulario.get('email').valid && formulario.get('email').touched" class="form-text text-danger fa fa-exclamation-triangle">
+                Email inválido!</small>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder="Senha" formControlName="senha">
+              <small *ngIf="!formulario.get('senha').valid && formulario.get('senha').touched" class="form-text text-danger fa fa-exclamation-triangle">
+                Senha inválida!</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm btn-block sombra-btn" [disabled]="!formulario.valid">Entrar</button>
+          </form>
+          <hr />
+          <p class="small text-danger text-center" *ngIf="message">{{message}}</p>
+          <hr />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,28 +1,26 @@
 <div class="ik-topo fixed-top">
-    <nav class="navbar navbar-default" id="main-navbar">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <div class="navbar-brand"> 
-            <span title="Menu" (click)="controlNav()" data-toggle="tooltip" 
-                  data-placement="bottom" style="font-size: 14px; text-align: center; vertical-align: top; cursor:pointer">
-                  <i class="fa fa-inverse fa-bars"></i>
+  <nav class="navbar navbar-default" id="main-navbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div class="navbar-brand">
+          <span title="Menu" (click)="controlNav()" data-toggle="tooltip" data-placement="bottom" style="font-size: 14px; text-align: center; vertical-align: top; cursor:pointer">
+            <i class="fa fa-inverse fa-bars"></i>
           </span>
-          </div>
         </div>
-  
-        <div class="text-center">
-            <a routerLink="/admin">
-              <img alt="Designer" src="../../../../assets/img/prysma_logo.png" title="Home" 
-              data-toggle="tooltip" data-placement="bottom" style="max-height: 40px;"/>
-          </a> 
-        </div>
-  
-        <div>
-          <a href=# (click)="sair()" style="margin-left: 20px;"
-             title="Sair" data-toggle="tooltip" data-placement="bottom">
-              <i class="fa fa-sign-out" style="color: white"></i>
-          </a>
-        </div>
-      </div>	
-    </nav>
-  </div>  
+      </div>
+
+      <div class="text-center">
+        <a routerLink="/">
+          <img alt="Prysma" src="../../../../assets/img/prysma_logo.png" title="Home" data-toggle="tooltip"
+            data-placement="bottom" style="max-height: 40px;" />
+        </a>
+      </div>
+
+      <div>
+        <span title="sair" (click)="sair()" data-toggle="tooltip" data-placement="bottom" style="font-size: 14px; text-align: center; vertical-align: top; cursor:pointer">
+            <i class="fa fa-sign-out" style="color: white"></i>
+        </span>
+      </div>
+    </div>
+  </nav>
+</div>

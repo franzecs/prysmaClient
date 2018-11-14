@@ -1,7 +1,11 @@
 import { Component, OnInit,OnDestroy , ViewChild } from '@angular/core';
-import { Usuario } from '../../../shared/models';
-import { UserService } from '../../../shared/services';
 import { OpcaoMenu, ItemMenu } from '../../../components';
+import { User } from '../../../shared/models/user.model';
+import { UserService } from '../../../services/user.service';
+import { SharedService, AuthService, StorageService } from '../../../services';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-home',
@@ -10,40 +14,49 @@ import { OpcaoMenu, ItemMenu } from '../../../components';
 })
 export class HomeComponent implements OnInit {
 
-  usuario: Usuario
   menus:OpcaoMenu[]
   
-  constructor(private userS: UserService) { }
+  constructor(
+      public storageService: StorageService,
+      public authService : AuthService,
+      private router: Router,
+    ) {     }
   
   ngOnInit() { 
-    this.userS.findUser().subscribe((resposta)=>{
-      this.usuario = resposta
-      this.changeMenu()
-    })
+    this.changeMenu();
+    this.authService.refreshToken().subscribe(response => {
+      this.authService.successfulLogin(response.headers.get('Authorization'));
+    }, err => this.authService.logout())
   }
 
   changeMenu(){
-    if(this.usuario.perfis.includes("ROOT_USER")){
-      this.menuRoot()
-    }
-    if(this.usuario.perfis.includes("ADM_LOJA")){
-      this.menuAdm()
-    }
-    if(this.usuario.perfis.includes("PDV_LOJA")){
-      this.menuPdv()
-    }
+
+    this.authService.currentUser(this.storageService.getLocalUser().email).subscribe((resposta: any)=>{
+      let perfis = resposta.data.perfis;
+
+      if(perfis.includes("ADMIN_SISTEMA")){
+        this.menuRoot()
+      }
+      if(perfis.includes("ADM_LOJA")){
+        this.menuAdm()
+      }
+      if(perfis.includes("VENDEDOR")){
+        this.menuPdv()
+      }
+
+    })
   }
   
   menuRoot(){
     this.menus = [
       new OpcaoMenu('Empresas','fa-address-card',[
-        new ItemMenu('Empresas','root/empresas','fa-id-card'),
+        new ItemMenu('Empresas','/root/empresas','fa-id-card'),
       ]),
       new OpcaoMenu('Usuarios','fa-product-hunt',[
-        new ItemMenu('Usuarios','root/usuarios','fa-archive'),
+        new ItemMenu('Usuarios','/root/usuarios','fa-archive'),
       ]),
       new OpcaoMenu('Configirações','fa-usd',[
-        new ItemMenu('Configurações','root/config','fa-archive'),
+        new ItemMenu('Configurações','/root/config','fa-archive'),
       ])
     ]
   }
