@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
-import { ListPage } from '../../../../shared/abstract/list.component';
-import { UserService } from '../../../../services/user.service';
-import { User } from '../../../../shared/models/user.model';
-import { ResponseApi } from '../../../../shared/models';
 import { take } from 'rxjs/operators';
+
+import { UserService } from '../../../../services/user.service';
+import { ResponseApi } from '../../../../shared/models';
 import { MsgType, ModalMessage } from 'src/app/components';
 import { DialogService } from 'src/app/services/dialog.service';
 

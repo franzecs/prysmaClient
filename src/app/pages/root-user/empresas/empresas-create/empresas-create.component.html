@@ -1,3 +1,119 @@
-<p>
-  empresas-create works!
-</p>
+<div class="card">
+  <div class="page-top">
+    Detalhes da Empresa
+    <a [routerLink]="['/root/empresas']">
+      <button class=" btn btn-warning btn-xs fa fa-arrow-circle-left pull-right" style="margin-top:2px;margin-right: 2px; padding: 2px;"></button>
+    </a>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xs-12">
+        <form [formGroup]="formulario" (ngSubmit)="onSubmite()">
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-sm-12 col-md-8">
+                <div class="form-group">
+                  <label for="nome">Nome</label>
+                  <input id="nome" type="text" class="form-control" formControlName="nome" ikUpCase/>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4">
+                <div class="form-group">
+                  <label for="cnpj">CNPJ</label>
+                  <input id="cnpj" type="text" class="form-control" formControlName="cnpj" IkMask="99.999.999/9999-99"/>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-3">
+                <div class="form-group">
+                  <label for="telefone">Telefone</label>
+                  <input id="telefone" type="text" class="form-control" formControlName="telefone" IkMask="(99)9999-9999"/>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-9">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" class="form-control" formControlName="email" ikLoCase/>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4">
+                <div class="form-group">
+                  <select class="custom-select" size="2" multiple formControlName="tipo">
+                    <option value="Matriz">Matriz</option>
+                    <option value="Filial">Filial</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-8" *ngIf="formulario.get('tipo').value[0] === 'Filial' ">
+                <div class="form-group">
+                  <label for="matriz">Matriz</label>
+                  <input id="matriz" type="text" class="form-control" formControlName="matriz" ikUpCase/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 card-flat">
+            <div formGroupName="endereco">
+              <div class="row">
+                <div class="col-xs-12 col-md-2">
+                  <div class="form-group">
+                    <label for="cep" class="control-label">CEP</label>
+                    <input type="text" class="form-control" id="cep" (blur)="consultaCEP()" formControlName="cep">
+                  </div>
+                </div>
+    
+                <div class="col-xs-12 col-md-8">
+                  <div class="form-group">
+                    <label for="rua" class="control-label">Rua</label>
+                    <input type="text" class="form-control" id="rua" formControlName="logradouro">
+                  </div>
+                </div>
+    
+                <div class="col-xs-12 col-md-2">
+                  <div class="form-group">
+                    <label for="numero" class="control-label">Número</label>
+                    <input type="text" class="form-control" id="numero" formControlName="numero">
+                  </div>
+                </div>
+    
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label for="complemento" class="control-label">Complemento</label>
+                    <input type="text" class="form-control" id="complemento" formControlName="complemento">
+                  </div>
+                </div>
+    
+                <div class="col-xs-12 col-md-5">
+                  <div class="form-group">
+                    <label for="bairro" class="control-label">Bairro</label>
+                    <input type="text" class="form-control" id="bairro" formControlName="bairro">
+                  </div>
+                </div>
+    
+                <div class="col-xs-12 col-md-2">
+                  <div class="form-group">
+                    <label for="cidade" class="control-label">Cidade</label>
+                    <select class="form-control" id="cidade" formControlName="cidade">
+                      <option *ngFor="let cidade of cidades" [value]="cidade.nome">{{ cidade.nome }}</option>
+                    </select>
+                  </div>
+                </div>
+    
+                <div class="col-xs-12 col-md-2">
+                  <div class="form-group">
+                    <label for="estado" class="control-label">Estado</label>
+                    <select class="form-control" id="estado" formControlName="estado">
+                      <option *ngFor="let estado of estados" [value]="estado.sigla">{{ estado.nome }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr/>
+          <button type="submit" class="btn btn-primary ">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <modal-message></modal-message>
+</div>
